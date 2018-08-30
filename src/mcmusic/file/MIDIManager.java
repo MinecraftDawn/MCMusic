@@ -17,24 +17,55 @@ public class MIDIManager {
 
     private Sequence sequence;
 
+    private Player player;
+
 
     public MIDIManager(Player p, String fileName) {
+        this.player = p;
+
         this.fileName = fileName;
 
-        sequence = getSequence();
+        this.sequence = getSequence();
 
         if (sequence == null) {
 
             p.sendMessage("檔案不存在");
 
         } else {
-            int trackNum = getTrackNum();
-            Thread[] threads = new Thread[trackNum];
-
-            for (int i = 0; i < trackNum; i++) {
-                threads[i] = new Thread();
-            }
+            PlayMusic();
         }
+    }
+
+    private void PlayMusic(){
+
+        int trackNum = getTrackNum();
+
+        Thread[] threads = new Thread[trackNum];
+
+        for (int i = 0; i < trackNum; i++) {
+            threads[i] = new Thread(new PlayMusic(player,sequence.getTracks()[i]));
+        }
+
+        Thread threadManager = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < trackNum; i++) {
+
+                    threads[i].start();
+
+                }
+
+                for (int i = 0; i < trackNum; i++) {
+                    try {
+                        threads[i].join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        threadManager.start();
     }
 
     private Sequence getSequence() {
