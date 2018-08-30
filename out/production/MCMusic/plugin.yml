@@ -1,0 +1,5 @@
+main: mcmusic.MCMusic
+name: MCMusic
+version: 0.0.1
+commands:
+  music:

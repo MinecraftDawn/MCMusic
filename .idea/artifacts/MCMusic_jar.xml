@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MCMusic:jar">
+    <output-path>E:/MinecraftServers/BungeeCord/Server2/plugins</output-path>
+    <root id="archive" name="MCMusic.jar">
+      <element id="module-output" name="MCMusic" />
+    </root>
+  </artifact>
+</component>
