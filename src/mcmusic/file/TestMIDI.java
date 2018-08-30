@@ -1,14 +1,17 @@
 package mcmusic.file;
 
+import mcmusic.MCMusic;
 import org.bukkit.Bukkit;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 
 public class TestMIDI implements Runnable {
+    private Plugin plugin = MCMusic.plugin;
     private int num;
 
     public TestMIDI(int num) {
@@ -19,7 +22,7 @@ public class TestMIDI implements Runnable {
     public void run() {
         Sequence sequence = null;
         try {
-            sequence = MidiSystem.getSequence(new File("打上花火.mid"));
+            sequence = MidiSystem.getSequence(new File(plugin.getDataFolder(),"打上花火.mid"));
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
         } catch (IOException e) {

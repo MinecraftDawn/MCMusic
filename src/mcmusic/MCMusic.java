@@ -13,6 +13,8 @@ public class MCMusic extends JavaPlugin {
 
         Bukkit.getPluginCommand("music").setExecutor(new cmdTest());
 
+        getDataFolder();
+
     }
 
 }
