@@ -2,7 +2,6 @@ package mcmusic.commands;
 
 import mcmusic.file.GetMusic;
 import mcmusic.file.MIDIManager;
-import mcmusic.file.TestMIDI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,7 +26,7 @@ public class cmdMusic implements CommandExecutor {
 
         } else if (args.length > 2) {
 
-            MIDIManager midiManager = new MIDIManager(p,args[2]);
+            MIDIManager midiManager = new MIDIManager(p, args[2]);
 
 
 //            Thread t1 = new Thread(new TestMIDI(0));

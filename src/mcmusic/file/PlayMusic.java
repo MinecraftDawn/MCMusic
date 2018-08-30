@@ -7,6 +7,7 @@ import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
+import java.util.Date;
 
 public class PlayMusic implements Runnable {
 
@@ -18,7 +19,9 @@ public class PlayMusic implements Runnable {
 
     private Player player;
 
-    public PlayMusic(Player p, Track track) {
+    private Long startTime;
+
+    public PlayMusic(Player p, Track track, Long startTime) {
 
         this.player = p;
 
@@ -27,10 +30,20 @@ public class PlayMusic implements Runnable {
         this.event = track.get(0);
 
         this.preTick = event.getTick();
+
+        this.startTime = startTime;
     }
 
     @Override
     public void run() {
+        if(new Date().getTime() - startTime > 0){
+
+            try {
+                Thread.sleep(new Date().getTime() - startTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         for (int i = 0; i < track.size(); i++) {
 

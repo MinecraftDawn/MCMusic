@@ -9,6 +9,7 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 public class MIDIManager {
     private String fileName;
@@ -43,7 +44,8 @@ public class MIDIManager {
         Thread[] threads = new Thread[trackNum];
 
         for (int i = 0; i < trackNum; i++) {
-            threads[i] = new Thread(new PlayMusic(player,sequence.getTracks()[i]));
+            threads[i] = new Thread(
+                    new PlayMusic(player,sequence.getTracks()[i],new Date().getTime()+500));
         }
 
         Thread threadManager = new Thread(new Runnable() {
