@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class cmdTest implements CommandExecutor {
+public class cmdMusic implements CommandExecutor {
 
 
     @Override
@@ -20,11 +20,16 @@ public class cmdTest implements CommandExecutor {
             Thread t = new Thread(new GetMusic("星球墜落", p));
             t.setPriority(Thread.NORM_PRIORITY);
             t.start();
+
         } else if (args.length == 2) {
             GetMusic.Set(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+
         } else if (args.length > 2) {
+
+
             Thread t1 = new Thread(new TestMIDI(0));
             Thread t2 = new Thread(new TestMIDI(1));
+
             Thread threadManager = new Thread(new Runnable() {
                 @Override
                 public void run() {
