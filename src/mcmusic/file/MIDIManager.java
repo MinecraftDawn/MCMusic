@@ -1,12 +1,11 @@
 package mcmusic.file;
 
 import mcmusic.MCMusic;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
+import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -19,6 +18,8 @@ public class MIDIManager {
     private Sequence sequence;
 
     private Player player;
+
+    private Float bpm;
 
 
     public MIDIManager(Player p, String fileName) {
@@ -37,7 +38,7 @@ public class MIDIManager {
         }
     }
 
-    private void PlayMusic(){
+    private void PlayMusic() {
 
         int trackNum = getTrackNum();
 
@@ -45,7 +46,8 @@ public class MIDIManager {
 
         for (int i = 0; i < trackNum; i++) {
             threads[i] = new Thread(
-                    new PlayMusic(player,sequence.getTracks()[i],new Date().getTime()+500));
+                    new PlayMusic(
+                            player, sequence.getTracks()[i], bpm, new Date().getTime() + 1000));
         }
 
         Thread threadManager = new Thread(new Runnable() {
@@ -77,11 +79,19 @@ public class MIDIManager {
 
             Sequence sequence = MidiSystem.getSequence(music);
 
+            Sequencer se = MidiSystem.getSequencer();
+            se.open();
+            se.setSequence(sequence);
+
+            this.bpm = se.getTempoInBPM();
+
             return sequence;
 
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (MidiUnavailableException e) {
             e.printStackTrace();
         }
 
@@ -92,7 +102,7 @@ public class MIDIManager {
         return sequence.getTracks().length;
     }
 
-    private void playMusic(){
+    private void playMusic() {
 
     }
 

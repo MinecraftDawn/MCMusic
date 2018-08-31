@@ -21,13 +21,17 @@ public class PlayMusic implements Runnable {
 
     private Long startTime;
 
-    public PlayMusic(Player p, Track track, Long startTime) {
+    private Float bpm;
+
+    public PlayMusic(Player p, Track track, Float bpm, Long startTime) {
 
         this.player = p;
 
         this.track = track;
 
         this.event = track.get(0);
+
+        this.bpm = bpm;
 
         this.preTick = event.getTick();
 
@@ -36,7 +40,7 @@ public class PlayMusic implements Runnable {
 
     @Override
     public void run() {
-        if(new Date().getTime() - startTime > 0){
+        if (new Date().getTime() - startTime > 0) {
 
             try {
                 Thread.sleep(new Date().getTime() - startTime);
@@ -73,7 +77,8 @@ public class PlayMusic implements Runnable {
                         long sleep = event.getTick() - preTick;
 
                         if (sleep > 0) {
-                            Thread.sleep(event.getTick() - preTick);
+                            Thread.sleep((long) ((event.getTick() - preTick)));
+//                            Thread.sleep((long) ((event.getTick() - preTick)*60/bpm));
                         }
 
                         preTick = event.getTick();
