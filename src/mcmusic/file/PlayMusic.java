@@ -77,7 +77,7 @@ public class PlayMusic implements Runnable {
                         long sleep = event.getTick() - preTick;
 
                         if (sleep > 0) {
-                            Thread.sleep((long) ((event.getTick() - preTick)));
+                            Thread.sleep(event.getTick() - preTick);
 //                            Thread.sleep((long) ((event.getTick() - preTick)*60/bpm));
                         }
 

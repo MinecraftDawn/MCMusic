@@ -83,21 +83,26 @@ public class MIDIManager {
 
             Sequence sequence = MidiSystem.getSequence(music);
 
-            Sequencer se = MidiSystem.getSequencer();
-            se.open();
-            se.setSequence(sequence);
+            this.bpm = Float.valueOf(100);
 
-            this.bpm = se.getTempoInBPM();
+            Sequencer se = null;
+            try {
+                se = MidiSystem.getSequencer();
 
-            se = null;
+                se.open();
+
+                se.setSequence(sequence);
+
+                this.bpm = se.getTempoInBPM();
+
+            } catch (MidiUnavailableException e) {
+            }
 
             return sequence;
 
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (MidiUnavailableException e) {
             e.printStackTrace();
         }
 
