@@ -108,8 +108,4 @@ public class MIDIManager {
         return sequence.getTracks().length;
     }
 
-    private void playMusic() {
-
-    }
-
 }
