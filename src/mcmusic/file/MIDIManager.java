@@ -77,6 +77,10 @@ public class MIDIManager {
         try {
             File music = new File(plugin.getDataFolder(), fileName + ".mid");
 
+            if(!music.exists()){
+                Bukkit.broadcastMessage("找不到檔案");
+            }
+
             Sequence sequence = MidiSystem.getSequence(music);
 
             Sequencer se = MidiSystem.getSequencer();
@@ -84,6 +88,8 @@ public class MIDIManager {
             se.setSequence(sequence);
 
             this.bpm = se.getTempoInBPM();
+
+            se = null;
 
             return sequence;
 
