@@ -1,5 +1,6 @@
 package mcmusic.file;
 
+import org.bukkit.Bukkit;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
@@ -50,6 +51,10 @@ public class PlayMusic implements Runnable {
         }
 
         for (int i = 0; i < track.size(); i++) {
+
+            if (!Bukkit.getOnlinePlayers().contains(player)) {
+                return;
+            }
 
             event = track.get(i);
 

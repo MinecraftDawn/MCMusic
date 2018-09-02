@@ -103,7 +103,6 @@ public class MIDIManager {
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return null;
