@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * 處理MIDI檔案
+ */
 public class MIDIManager {
     private String fileName;
 
@@ -22,6 +25,11 @@ public class MIDIManager {
     private Float bpm;
 
 
+    /**
+     *
+     * @param p 要撥放給哪個玩家聽
+     * @param fileName 撥放的音樂檔名稱
+     */
     public MIDIManager(Player p, String fileName) {
         this.player = p;
 
@@ -29,16 +37,18 @@ public class MIDIManager {
 
         this.sequence = getSequence();
 
-        if (sequence == null) {
-
-            p.sendMessage("檔案不存在");
-
-        } else {
-            PlayMusic();
-        }
     }
 
-    private void PlayMusic() {
+    /**
+     * 開始撥放音樂
+     */
+    public void PlayMusic() {
+
+        if (sequence == null) {
+
+            player.sendMessage("檔案不存在");
+            return;
+        }
 
         int trackNum = getTrackNum();
 
@@ -72,12 +82,16 @@ public class MIDIManager {
         threadManager.start();
     }
 
+    /**
+     * 取得Sequence
+     * @return 回傳取得後的Sequence，如果為null代表取得失敗
+     */
     private Sequence getSequence() {
 
         try {
             File music = new File(plugin.getDataFolder(), fileName + ".mid");
 
-            if(!music.exists()){
+            if (!music.exists()) {
                 Bukkit.broadcastMessage("找不到檔案");
             }
 
@@ -108,6 +122,10 @@ public class MIDIManager {
         return null;
     }
 
+    /**\
+     * 取得有幾個音軌
+     * @return 音軌數量
+     */
     private int getTrackNum() {
         return sequence.getTracks().length;
     }

@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *負責處理yml檔
+ * 負責處理yml檔
  */
 public class YMLManager {
 
@@ -40,6 +40,7 @@ public class YMLManager {
 
     /**
      * 單例模式，只產生一個實例，若其他Class需要使用yml，則需要取得此I實例
+     *
      * @return 回傳出一個YMLManager實例
      */
     //單例模式，只產生一個實例
@@ -55,6 +56,7 @@ public class YMLManager {
 
     /**
      * 重新讀取yml檔案
+     *
      * @return 是否成功讀取，成功為true，失敗為false
      */
     //讀取Backpack.yml檔案內容
@@ -72,6 +74,7 @@ public class YMLManager {
 
     /**
      * 儲存修改後的yml檔案
+     *
      * @return 是否成功儲存，成功為true，失敗為false
      */
     //儲存Backpack.yml檔案內容

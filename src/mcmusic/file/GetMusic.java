@@ -1,11 +1,11 @@
 package mcmusic.file;
 
-import org.bukkit.Bukkit;
 import org.bukkit.SoundCategory;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.Set;
+
 
 public class GetMusic implements Runnable {
     private static YMLManager yml = YMLManager.getInstance();
@@ -15,11 +15,11 @@ public class GetMusic implements Runnable {
     private String musicName;
     private Player player;
 
+
     public GetMusic(String name, Player p) {
         this.musicName = name;
         this.player = p;
     }
-
 
     public static void Set(int tone, int delay) {
         yml.loadData();
@@ -41,7 +41,7 @@ public class GetMusic implements Runnable {
 
             if (str.equals(musicName)) {
 
-                Set<String > music = data.getConfigurationSection(yml.str2DotStr(str, "樂曲")).getKeys(false);
+                Set<String> music = data.getConfigurationSection(yml.str2DotStr(str, "樂曲")).getKeys(false);
 
                 Double tempo = data.getDouble(yml.str2DotStr(str, "節奏"));
                 tempo = 60 / tempo;
@@ -49,7 +49,7 @@ public class GetMusic implements Runnable {
                 tempo = tempo * 1000;
 
                 for (String s : music) {
-                    if(! data.isSet(yml.str2DotStr(str, "樂曲", s))) continue;
+                    if (!data.isSet(yml.str2DotStr(str, "樂曲", s))) continue;
 
                     Integer tone = data.getInt(yml.str2DotStr(str, "樂曲", s, "音調"));
                     Integer delay = data.getInt(yml.str2DotStr(str, "樂曲", s, "delay"));

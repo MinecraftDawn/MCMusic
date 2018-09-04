@@ -7,8 +7,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class cmdMusic implements CommandExecutor {
 
+/**
+ * 處理指令部分
+ * 如果有兩個以上參數，就可以播歌
+ * 第三個參數為歌名
+ */
+public class cmdMusic implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -28,8 +33,7 @@ public class cmdMusic implements CommandExecutor {
 
             MIDIManager midiManager = new MIDIManager(p, args[2]);
 
-
-
+            midiManager.PlayMusic();
         }
 
 
