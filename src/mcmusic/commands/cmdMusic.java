@@ -22,7 +22,7 @@ public class cmdMusic implements CommandExecutor {
         Player p = (Player) sender;
 
         if (args.length == 0) {
-            Thread t = new Thread(new GetMusic("星球墜落", p));
+            Thread t = new Thread(new GetMusic("小情歌", p));
             t.setPriority(Thread.NORM_PRIORITY);
             t.start();
 
